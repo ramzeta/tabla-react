@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-
+import MockData from "../data/MockData.json";
 import TableStyle from "../styles/TableStyle";
 
 
