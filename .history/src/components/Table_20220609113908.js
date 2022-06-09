@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import MockData from "../data/MockData.json"
+import MockData from "../data/MockData.json";
 import TableStyle from "../styles/TableStyle";
 
 
-function Table() {
+function Table(MockData) {
     const [data, setdata] = useState(MockData)
     const [order, setorder] = useState("ASC");
 
@@ -34,7 +34,7 @@ function Table() {
                     <th onClick={() => sorting("phoneNumber")}>Numero</th>
                     <th onClick={() => sorting("emailAddress")}>Email</th>
                 </tr>
-                {data.map((user, index) => {
+                {MockData.map((user, index) => {
                     return (<>
                         <tr key={user.userId}>
                             <td>{user.firstName}</td>
