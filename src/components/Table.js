@@ -28,12 +28,12 @@ function Table() {
     };
 
     //Buscador por nombre
-    // usuario => usuario.firstName.toLowerCase() === text.toLowerCase()
+    // user => user.firstName.toLowerCase() === text.toLowerCase()
     const handelChangeSearch = ((e) => {
         text = e.target.value;
         console.log(text)
 
-        const resultado = MockData.filter(
+        const result = MockData.filter(
 
             user => {
                 const searchUser = Object.values(user);
@@ -44,13 +44,13 @@ function Table() {
 
         );
 
-        if (resultado.length>0) {
-            setData(resultado);
+        if (result.length>0) {
+            setData(result);
         } else {
             setData(MockData)
         }
 
-        console.log(resultado);
+        console.log(result);
     });
 
     return (
