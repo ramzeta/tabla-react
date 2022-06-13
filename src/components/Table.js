@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import MockData from "../data/MockData.json"
 import TableStyle from "../styles/TableStyle";
 
@@ -27,15 +27,25 @@ function Table() {
         }
     };
 
-
-
+    //Buscador por nombre
+    // usuario => usuario.firstName.toLowerCase() === text.toLowerCase()
     const handelChangeSearch = ((e) => {
         text = e.target.value;
         console.log(text)
 
-        const resultado = data.find(usuario => usuario.firstName.toLowerCase() === text.toLowerCase());
-        if (resultado != null) {
-            setData([resultado]);
+        const resultado = MockData.filter(
+
+            user => {
+                const searchUser = Object.values(user);
+                const searcValues = searchUser.find((value) => value.toString().startsWith(text));
+                return searcValues;
+                
+            }
+
+        );
+
+        if (resultado.length>0) {
+            setData(resultado);
         } else {
             setData(MockData)
         }
