@@ -1,32 +1,55 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useRef, useEffect } from "react";
 import MockData from "../data/MockData.json"
 import TableStyle from "../styles/TableStyle";
 
 
 function Table() {
-    const [data, setdata] = useState(MockData)
-    const [order, setorder] = useState("ASC");
+    const [data, setData] = useState(MockData)
+    const [order, setOrder] = useState("ASC");
+    const [inputValue, setInputValue] = useState(data);
+    let text ="";
 
     const sorting = (col) => {
         if (order === "ASC") {
             const sorted = [...data].sort((a, b) =>
                 a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
             );
-            setdata(sorted);
-            setorder("DSC");
+            setData(sorted);
+            setOrder("DSC");
         }
         if (order === "DSC") {
             const sorted = [...data].sort((a, b) =>
                 a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
             );
-            setdata(sorted);
-            setorder("ASC");
+            setData(sorted);
+            setOrder("ASC");
         }
     };
+
+    
+
+    const handelChangeSearch =  ((e)=>{
+        text = e.target.value;
+        console.log(text)
+
+        const resultado = data.find( usuario => usuario.firstName.toLowerCase() === text.toLowerCase() );
+        if(resultado!=null){
+           setData([resultado]);
+        }else{
+            setData(MockData)
+        }
+        
+        console.log(resultado); //
+    });
+
     return (
 
         <TableStyle>
+            <div className="contenedor">
+                <h4>Buscador</h4>
+                <input onChange={handelChangeSearch} type="text" id="fname" name="fname"></input>
+            </div>
             <table>
                 <tr>
                     <th onClick={() => sorting("firstName")}>Nombre</th>
@@ -34,9 +57,9 @@ function Table() {
                     <th onClick={() => sorting("phoneNumber")}>Numero</th>
                     <th onClick={() => sorting("emailAddress")}>Email</th>
                 </tr>
-                {data.map((user, index) => {
+                {data?( data.map((user) => {
                     return (<>
-                        <tr key={user.userId}>
+                        <tr onClick={() => setInputValue(user)} key={user.userId}>
                             <td>{user.firstName}</td>
                             <td>{user.lastName}</td>
                             <td>{user.phoneNumber}</td>
@@ -44,10 +67,18 @@ function Table() {
                         </tr>
                     </>
                     )
-                })}
-            </table>
-        </TableStyle>
+                })):<></>}
 
+            </table>
+            <div>
+            <h2>Seleccionado</h2>
+                <p>{inputValue?.firstName}</p>
+                <p>{inputValue?.lastName}</p>
+                <p>{inputValue?.phoneNumber}</p>
+                <p>{inputValue?.emailAddress}</p>
+            </div>
+        </TableStyle>
+        
 
     );
 }

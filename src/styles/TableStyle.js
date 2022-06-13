@@ -18,6 +18,10 @@ const TableStyle = styled.table`
     cursor: pointer
   }
 
+  tr:hover {
+    cursor: pointer
+  }
+
   tr {
     padding:15px;
     background-color:#F3F3F3;
