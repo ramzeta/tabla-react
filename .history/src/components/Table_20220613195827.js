@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef, useEffect } from "react";
+import { useState,useRef, useEffect } from "react";
 import MockData from "../data/MockData.json"
 import TableStyle from "../styles/TableStyle";
 
@@ -8,7 +8,7 @@ function Table() {
     const [data, setData] = useState(MockData)
     const [order, setOrder] = useState("ASC");
     const [inputValue, setInputValue] = useState(data);
-    let text = "";
+    let text ="";
 
     const sorting = (col) => {
         if (order === "ASC") {
@@ -27,19 +27,19 @@ function Table() {
         }
     };
 
+    
 
-
-    const handelChangeSearch = ((e) => {
+    const handelChangeSearch =  ((e)=>{
         text = e.target.value;
         console.log(text)
 
-        const resultado = data.find(usuario => usuario.firstName.toLowerCase() === text.toLowerCase());
-        if (resultado != null) {
-            setData([resultado]);
-        } else {
+        const resultado = data.find( usuario => usuario.firstName.toLowerCase() === text.toLowerCase() );
+        if(resultado!=null){
+           setData([resultado]);
+        }else{
             setData(MockData)
         }
-
+        
         console.log(resultado);
     });
 
@@ -57,7 +57,7 @@ function Table() {
                     <th onClick={() => sorting("phoneNumber")}>Numero</th>
                     <th onClick={() => sorting("emailAddress")}>Email</th>
                 </tr>
-                {data ? (data.map((user) => {
+                {data?( data.map((user) => {
                     return (<>
                         <tr onClick={() => setInputValue(user)} key={user.userId}>
                             <td>{user.firstName}</td>
@@ -67,18 +67,18 @@ function Table() {
                         </tr>
                     </>
                     )
-                })) : <></>}
+                })):<></>}
 
             </table>
             <div>
-                <h2>Seleccionado</h2>
+            <h2>Seleccionado</h2>
                 <p>{inputValue?.firstName}</p>
                 <p>{inputValue?.lastName}</p>
                 <p>{inputValue?.phoneNumber}</p>
                 <p>{inputValue?.emailAddress}</p>
             </div>
         </TableStyle>
-
+        
 
     );
 }
