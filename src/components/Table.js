@@ -37,7 +37,7 @@ function Table() {
 
             user => {
                 const searchUser = Object.values(user);
-                const searcValues = searchUser.find((value) => value.toString().startsWith(text));
+                const searcValues = searchUser.find((value) => value.toString().toLowerCase().startsWith(text.toLowerCase()));
                 return searcValues;
                 
             }
